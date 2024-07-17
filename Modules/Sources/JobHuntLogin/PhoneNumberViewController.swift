@@ -49,9 +49,7 @@ public final class PhoneNumberViewController: UIViewController {
 }
 
 extension PhoneNumberViewController {
-    
     private func setupUI() {
-        
         view.backgroundColor = .white
         
         setupStackView()
@@ -74,7 +72,6 @@ extension PhoneNumberViewController {
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
         }
-        
         self.stackView = stackView
     }
     
@@ -99,8 +96,6 @@ extension PhoneNumberViewController {
         label.numberOfLines = 0
         
         stackView.addArrangedSubview(label)
-
-        
     }
     
     private func setupSubtitle() {
@@ -149,7 +144,6 @@ extension PhoneNumberViewController {
             make.right.equalTo(-20)
             make.center.equalToSuperview()
         }
-        
         self.textField = textField
     }
     
@@ -172,10 +166,7 @@ extension PhoneNumberViewController {
             make.left.equalTo(20)
             make.right.equalTo(-20)
             make.bottom.equalTo(20)
-//          make.width.equalToSuperview()
-//          make.center.equalToSuperview()
         }
-        
         self.continueButton = button
     }
 }
@@ -189,9 +180,7 @@ extension PhoneNumberViewController {
 }
 
 extension PhoneNumberViewController {
-    
     @objc func didTapContinue() {
-        
         guard
             textField.isValidNumber,
             let phoneNumber = textField.text

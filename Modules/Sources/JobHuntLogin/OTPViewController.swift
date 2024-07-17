@@ -41,7 +41,6 @@ public final class OTPViewController: UIViewController {
             target: self,
             action: #selector(dismissKeyboard)
         )
-                
         view.addGestureRecognizer(tap)
     }
     
@@ -75,9 +74,7 @@ extension OTPViewController {
             make.left.equalToSuperview().offset(32)
             make.right.equalToSuperview().offset(-32)
             make.bottom.equalToSuperview().offset(0)
-
         }
-        
         self.stackView = stackView
     }
     
@@ -203,19 +200,16 @@ extension OTPViewController {
             let isKeyboardHidden = keyboardFrame.origin.y <= UIScreen.main.bounds.size.height
             
             // if keyboard is hidden
-            
             let topMargin = isKeyboardHidden ? -40 : -keyboardHeight - 40
             
             stackView.snp.updateConstraints { make in
                 make.bottom.equalToSuperview().offset(topMargin)
             }
-            
             self.view.layoutIfNeeded()
         }
     }
     
     @objc func didChangeText(textField: UITextField) {
-        
         let index = textField.tag - 100
         let nextIndex = index + 1
         textField.backgroundColor = UIColor(resource: .backgroundFrBtn)
@@ -267,7 +261,6 @@ extension OTPViewController {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-48)
         }
-        
         view.layoutIfNeeded()
         
         self.continueBtn = button
@@ -280,7 +273,6 @@ extension OTPViewController {
 }
 
 extension OTPViewController {
-    
     private func setContinueButtonDisabled() {
         continueBtn.isEnabled = false
         continueBtn.alpha = 0.5
