@@ -27,10 +27,8 @@ public final class OTPViewModel {
         for digit in digits {
             guard digit.isValidDigit else { return false }
         }
-        
         return true
     }
-    
     private func combineToOTP(digits: [String]) -> String {
         digits.joined()
     }
