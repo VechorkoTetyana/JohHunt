@@ -200,7 +200,8 @@ extension PhoneNumberViewController {
     private func presentOTP() {
         let viewController = OTPViewController()
         viewController.viewModel = OTPViewModel(authService: viewModel.authService)
- //       viewController.phoneNumber = textField.text ?? ""
+        
+        viewController.phoneNumber = textField.text ?? ""
         viewController.viewModel = OTPViewModel(authService: viewModel.authService)
         navigationController?.pushViewController(viewController, animated: true)
     }

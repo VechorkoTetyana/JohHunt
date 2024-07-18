@@ -105,11 +105,12 @@ extension OTPViewController {
         string.append(phoneNumberLbl)
         
         label.attributedText = string
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         
         view.addSubview(label)
         
         label.snp.makeConstraints { make in
+            make.width.equalTo(335)
             make.centerX.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(25)
         }
