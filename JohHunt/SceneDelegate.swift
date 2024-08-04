@@ -1,29 +1,65 @@
 import UIKit
 import DesignKit
 import JobHuntAuthentication
+import JobHuntCore
 import JobHuntLogin
+import JobHuntSettings
+import Swinject
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var container: Container!
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        setupContainer()
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
+
+        UINavigationController.styleJobHunt()
         
-        let authService = AuthServiceLive()
-        
+/*        let authService = AuthServiceLive()
         let controller = PhoneNumberViewController()
         controller.viewModel = PhoneNumberViewModel(authService: authService)
+*/
+//        let controller = PhoneNumberViewController()
         
-        let navigationController = UINavigationController(rootViewController: controller)
-        navigationController.styleJobHunt()
+        let navigationController = UINavigationController(
+            rootViewController: setupInitialViewController()
+        )
+//        navigationController.styleJobHunt()
         
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         self.window = window
         
+        subscribeToLogin()
+        subscribeToLogout()
+    }
+    
+    private func setupInitialViewController() -> UIViewController {
+        let authService = AuthServiceLive()
+        
+        if authService.isAuthenticated {
+            return setupTabBar()
+        } else {
+            return setupPhoneNumberController()
+        }
+    }
+    
+    private func setupTabBar() -> UIViewController {
+        TabBarController(container: container)
+    }
+    
+    private func setupPhoneNumberController() -> UIViewController {
+        let authService = AuthServiceLive()
+        let viewModel = PhoneNumberViewModel(container: container)
+        
+        let phoneNumberController = PhoneNumberViewController()
+        phoneNumberController.viewModel = viewModel
+        
+        return phoneNumberController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -65,6 +101,54 @@ extension UINavigationController {
         navigationBar.backIndicatorTransitionMaskImage = image
 
         navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+    }
+}
+
+extension SceneDelegate {
+    private func subscribeToLogin() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didLoginSuccessfully),
+            name: Notification.Name(AppNotification.didLoginSuccessfully.rawValue),
+            object: nil
+        )
+    }
+    
+    @objc
+    private func didLoginSuccessfully() {
+        let navigationController = window?.rootViewController as? UINavigationController
+        navigationController?.setViewControllers([setupTabBar()], animated: true)
+    }
+}
+
+// MARK: Logout
+
+extension SceneDelegate {
+    private func subscribeToLogout() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didLogout),
+            name: Notification.Name(AppNotification.didLogout.rawValue),
+            object: nil
+        )
+    }
+    
+    @objc
+    private func didLogout() {
+        let navigationController = window?.rootViewController as? UINavigationController
+        navigationController?.setViewControllers([
+            setupPhoneNumberController()
+        ], animated: true)
+    }
+}
+
+extension SceneDelegate {
+    private func setupContainer() {
+        container = Container()
+        AppAssembly(container: container).assemble()
+        
+//        let assembler = AppAssembly()
+//        assembler.assemble()
     }
 }
 

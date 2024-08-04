@@ -14,6 +14,15 @@
 		665AF0632C2B1E2F009767CC /* Urbanist-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665AF0612C2B1E2F009767CC /* Urbanist-Bold.ttf */; };
 		665AF0642C2B1E2F009767CC /* Urbanist-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 665AF0622C2B1E2F009767CC /* Urbanist-Medium.ttf */; };
 		665AF0682C2B1EE1009767CC /* DesignKit in Frameworks */ = {isa = PBXBuildFile; productRef = 665AF0672C2B1EE1009767CC /* DesignKit */; };
+		B85238912C5CE1D100EEF9BC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85238902C5CE1D100EEF9BC /* TabBarController.swift */; };
+		B85238932C5CE1E000EEF9BC /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85238922C5CE1E000EEF9BC /* Tab.swift */; };
+		B85238962C5CE20D00EEF9BC /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B85238952C5CE20D00EEF9BC /* Media.xcassets */; };
+		B85238992C5EE9DA00EEF9BC /* JobHuntCore in Frameworks */ = {isa = PBXBuildFile; productRef = B85238982C5EE9DA00EEF9BC /* JobHuntCore */; };
+		B852389B2C5EF7DC00EEF9BC /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B852389A2C5EF7DC00EEF9BC /* DIContainer.swift */; };
+		B852389D2C5EF84700EEF9BC /* JobHuntSettings in Frameworks */ = {isa = PBXBuildFile; productRef = B852389C2C5EF84700EEF9BC /* JobHuntSettings */; };
+		B852389F2C5EF89300EEF9BC /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B852389E2C5EF89300EEF9BC /* AppAssembly.swift */; };
+		B85238A22C5EFE7900EEF9BC /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = B85238A12C5EFE7900EEF9BC /* Swinject */; };
+		B85238A42C5EFE7900EEF9BC /* Swinject-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = B85238A32C5EFE7900EEF9BC /* Swinject-Dynamic */; };
 		B8F7690E2C45721A00185CB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8F7690D2C45721A00185CB7 /* GoogleService-Info.plist */; };
 		B8F769112C45763900185CB7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B8F769102C45763900185CB7 /* FirebaseAuth */; };
 		B8F769132C467F4F00185CB7 /* JobHuntAuthentication in Frameworks */ = {isa = PBXBuildFile; productRef = B8F769122C467F4F00185CB7 /* JobHuntAuthentication */; };
@@ -30,6 +39,11 @@
 		665AF0612C2B1E2F009767CC /* Urbanist-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-Bold.ttf"; sourceTree = "<group>"; };
 		665AF0622C2B1E2F009767CC /* Urbanist-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Urbanist-Medium.ttf"; sourceTree = "<group>"; };
 		665AF0652C2B1E5E009767CC /* Modules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Modules; sourceTree = SOURCE_ROOT; };
+		B85238902C5CE1D100EEF9BC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		B85238922C5CE1E000EEF9BC /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		B85238952C5CE20D00EEF9BC /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		B852389A2C5EF7DC00EEF9BC /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		B852389E2C5EF89300EEF9BC /* AppAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
 		B8F7690D2C45721A00185CB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -38,6 +52,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B852389D2C5EF84700EEF9BC /* JobHuntSettings in Frameworks */,
+				B85238A42C5EFE7900EEF9BC /* Swinject-Dynamic in Frameworks */,
+				B85238992C5EE9DA00EEF9BC /* JobHuntCore in Frameworks */,
+				B85238A22C5EFE7900EEF9BC /* Swinject in Frameworks */,
 				665AF0682C2B1EE1009767CC /* DesignKit in Frameworks */,
 				B8F769132C467F4F00185CB7 /* JobHuntAuthentication in Frameworks */,
 				B8F769112C45763900185CB7 /* FirebaseAuth in Frameworks */,
@@ -69,8 +87,9 @@
 			isa = PBXGroup;
 			children = (
 				665AF0652C2B1E5E009767CC /* Modules */,
-				665AF05F2C2B1E07009767CC /* Resources */,
+				665AF05F2C2B1E07009767CC /* JohHunt */,
 				665AF04B2C2B1D17009767CC /* AppDelegate.swift */,
+				B852389A2C5EF7DC00EEF9BC /* DIContainer.swift */,
 				665AF04D2C2B1D17009767CC /* SceneDelegate.swift */,
 				665AF0562C2B1D19009767CC /* LaunchScreen.storyboard */,
 				B8F7690D2C45721A00185CB7 /* GoogleService-Info.plist */,
@@ -79,13 +98,16 @@
 			path = JohHunt;
 			sourceTree = "<group>";
 		};
-		665AF05F2C2B1E07009767CC /* Resources */ = {
+		665AF05F2C2B1E07009767CC /* JohHunt */ = {
 			isa = PBXGroup;
 			children = (
+				B852388F2C5CE1BA00EEF9BC /* Tab */,
+				B85238942C5CE1E600EEF9BC /* Resources */,
 				665AF0602C2B1E0D009767CC /* Fonts */,
 				665AF0542C2B1D19009767CC /* Assets.xcassets */,
+				B852389E2C5EF89300EEF9BC /* AppAssembly.swift */,
 			);
-			path = Resources;
+			path = JohHunt;
 			sourceTree = "<group>";
 		};
 		665AF0602C2B1E0D009767CC /* Fonts */ = {
@@ -102,6 +124,31 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B852388F2C5CE1BA00EEF9BC /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				B85238902C5CE1D100EEF9BC /* TabBarController.swift */,
+				B85238922C5CE1E000EEF9BC /* Tab.swift */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		B85238942C5CE1E600EEF9BC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B85238972C5CE21700EEF9BC /* Fonts */,
+				B85238952C5CE20D00EEF9BC /* Media.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B85238972C5CE21700EEF9BC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +172,10 @@
 				B8F769102C45763900185CB7 /* FirebaseAuth */,
 				B8F769122C467F4F00185CB7 /* JobHuntAuthentication */,
 				B8F769142C467F5300185CB7 /* JobHuntLogin */,
+				B85238982C5EE9DA00EEF9BC /* JobHuntCore */,
+				B852389C2C5EF84700EEF9BC /* JobHuntSettings */,
+				B85238A12C5EFE7900EEF9BC /* Swinject */,
+				B85238A32C5EFE7900EEF9BC /* Swinject-Dynamic */,
 			);
 			productName = JohHunt;
 			productReference = 665AF0482C2B1D17009767CC /* JohHunt.app */;
@@ -156,6 +207,7 @@
 			mainGroup = 665AF03F2C2B1D17009767CC;
 			packageReferences = (
 				B8F7690F2C45763900185CB7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				B85238A02C5EFE7900EEF9BC /* XCRemoteSwiftPackageReference "Swinject" */,
 			);
 			productRefGroup = 665AF0492C2B1D17009767CC /* Products */;
 			projectDirPath = "";
@@ -175,6 +227,7 @@
 				665AF0582C2B1D19009767CC /* Base in Resources */,
 				665AF0642C2B1E2F009767CC /* Urbanist-Medium.ttf in Resources */,
 				B8F7690E2C45721A00185CB7 /* GoogleService-Info.plist in Resources */,
+				B85238962C5CE20D00EEF9BC /* Media.xcassets in Resources */,
 				665AF0632C2B1E2F009767CC /* Urbanist-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,8 +239,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B85238912C5CE1D100EEF9BC /* TabBarController.swift in Sources */,
 				665AF04C2C2B1D17009767CC /* AppDelegate.swift in Sources */,
+				B852389B2C5EF7DC00EEF9BC /* DIContainer.swift in Sources */,
+				B852389F2C5EF89300EEF9BC /* AppAssembly.swift in Sources */,
 				665AF04E2C2B1D17009767CC /* SceneDelegate.swift in Sources */,
+				B85238932C5CE1E000EEF9BC /* Tab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +457,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B85238A02C5EFE7900EEF9BC /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
 		B8F7690F2C45763900185CB7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -414,6 +479,24 @@
 		665AF0672C2B1EE1009767CC /* DesignKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DesignKit;
+		};
+		B85238982C5EE9DA00EEF9BC /* JobHuntCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JobHuntCore;
+		};
+		B852389C2C5EF84700EEF9BC /* JobHuntSettings */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JobHuntSettings;
+		};
+		B85238A12C5EFE7900EEF9BC /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B85238A02C5EFE7900EEF9BC /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		B85238A32C5EFE7900EEF9BC /* Swinject-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B85238A02C5EFE7900EEF9BC /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = "Swinject-Dynamic";
 		};
 		B8F769102C45763900185CB7 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

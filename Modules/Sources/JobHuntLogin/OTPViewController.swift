@@ -2,6 +2,7 @@ import UIKit
 import DesignKit
 import SnapKit
 import PhoneNumberKit
+import JobHuntCore
 
 enum OTPText: String {
     case title = "Enter the OTP code"
@@ -289,19 +290,30 @@ extension OTPViewController {
         
         let digits = textFields.map { $0.text ?? "" }
         
+        let loadingVC = LoadingViewController()
+        loadingVC.modalPresentationStyle = .overCurrentContext
+        self.present(loadingVC, animated: true)
+        
         Task { [weak self] in
             do {
                 try await self?.viewModel.verifyOTP(with: digits)
                 
-                let vc = UIViewController()
+                loadingVC.dismiss(animated: true) {
+                    self?.didLoginSuccessfully() }
+                
+           /*     let vc = UIViewController()
                 vc.modalPresentationStyle = .fullScreen
-                self?.present(vc, animated: true)
+                self?.present(vc, animated: true) */
                 
             } catch {
                 self?.showError(error.localizedDescription)
                 self?.setContinueButtonEnabled()
             }
         }
+    }
+    
+    private func didLoginSuccessfully() {
+        NotificationCenter.default.post(.didLoginSuccessfully)
     }
 }
 
