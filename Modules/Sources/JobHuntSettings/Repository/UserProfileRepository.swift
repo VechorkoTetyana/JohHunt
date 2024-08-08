@@ -2,21 +2,7 @@ import Foundation
 import FirebaseDatabase
 import JobHuntAuthentication
 
-public struct UserProfile: Codable {
-    public let fullName: String
-    public let description: String
-    public let profilePictureUrl: URL?
-    
-    public init(
-        fullName: String,
-        description: String,
-        profilePictureUrl: URL? = nil
-    ) {
-        self.fullName = fullName
-        self.description = description
-        self.profilePictureUrl = profilePictureUrl
-    }
-}
+// https://jobhunt-92d8e-default-rtdb.europe-west1.firebasedatabase.app
 
 public enum UserProfileRepositoryError: Error {
     case notAuthenticated
@@ -57,8 +43,8 @@ public class UserProfileRepositoryLive: UserProfileRepository {
         }
         
         reference.child("users").child(user.uid).setValue([
-            "fullName": userProfile.fullName,
-            "description": userProfile.description
+            "companyName": userProfile.companyName,
+            "description": userProfile.location
         ])
     }
     

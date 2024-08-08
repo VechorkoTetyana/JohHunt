@@ -18,7 +18,7 @@ public extension UINavigationController {
         
         appearence.tintColor = .accent
         
-        let image = UIImage(resource: .right)
+        let image = UIImage(resource: .left)
         
         appearence.backIndicatorImage = image
         appearence.backIndicatorTransitionMaskImage = image

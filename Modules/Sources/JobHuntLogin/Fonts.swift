@@ -23,6 +23,14 @@ public extension UIFont {
         UIFont(name: Fonts.urbanistBold.rawValue, size: 16)!
     }
     
+    static var titleP1: UIFont {
+        UIFont(name: Fonts.urbanistBold.rawValue, size: 18)!
+    }
+    
+    static var titleP2: UIFont {
+        UIFont(name: Fonts.urbanistBold.rawValue, size: 14)!
+    }
+    
     static var textField: UIFont {
         UIFont(name: Fonts.urbanistBold.rawValue, size: 24)!
     }

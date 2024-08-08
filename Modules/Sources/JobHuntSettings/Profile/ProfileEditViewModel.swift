@@ -6,8 +6,8 @@ import JobHuntCore
 public final class ProfileEditViewModel {
     
     var selectedImage: UIImage?
-    var fullName: String = ""
-    var description: String = ""
+    var companyName: String = ""
+    var location: String = ""
     var profilePictureUrl: URL? = nil
     
     let container: Container
@@ -22,22 +22,22 @@ public final class ProfileEditViewModel {
         container.resolve(ProfilePictureRepository.self)!
     }
 
-    init(
+   public init(
     container: Container
     ) {
         self.container = container
         
         if let profile = userRepository.profile {
-            fullName = profile.fullName
-            description = profile.description
+            companyName = profile.companyName
+            location = profile.location
             profilePictureUrl = profile.profilePictureUrl
         }
     }
     
     func save() async throws {
         let profile = UserProfile(
-            fullName: fullName,
-            description: description
+            companyName: companyName,
+            location: location
         )
         
         try userRepository.saveUserProfile(profile)
