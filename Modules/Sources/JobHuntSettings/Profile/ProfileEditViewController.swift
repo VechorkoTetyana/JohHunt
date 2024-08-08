@@ -6,18 +6,19 @@ public final class ProfileEditViewController: UIViewController {
     
     enum Row: Int, CaseIterable {
         case profilePicture = 0
-        case fullName = 1
-        case description = 2
-        case logout = 3
+        case companyName = 1
+//        case logout = 2
     }
     
     private weak var tableView: UITableView!
+    private weak var titleLbl: UILabel!
     
     var viewModel: ProfileEditViewModel!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        configureEditProfileLbl()
         configureTableView()
         setupHideKeyBoardGesture()
         subscribeToKeyboard()
@@ -36,6 +37,21 @@ public final class ProfileEditViewController: UIViewController {
         tableView.register(ProfileTextFieldCell.self, forCellReuseIdentifier: ProfileTextFieldCell.identifier)
         tableView.register(ButtonCell.self, forCellReuseIdentifier: ButtonCell.identifier)
     
+    }
+    
+    private func configureEditProfileLbl() {
+        let label = UILabel()
+        label.text = "Edit profile"
+        label.textColor = .black
+        label.font = .titleP1
+        
+        view.addSubview(label)
+        
+        label.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(65)
+            make.centerX.equalToSuperview()
+        }
+        titleLbl = label
     }
 }
 
@@ -172,25 +188,32 @@ extension ProfileEditViewController: UITableViewDataSource {
             
             return cell
             
-        case .fullName, .description:
+        case .companyName:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldCell.identifier, for: indexPath) as? ProfileTextFieldCell
             else { return UITableViewCell() }
             
             cell.textField.delegate = self
             
-            cell.configure(
-                with: row == .fullName
-                ? .fullName(text: viewModel.fullName)
-                : .description(text: viewModel.description))
+         /*   cell.configure(with: row == .fullName
+                ? .companyName(text: viewModel.companyName)
+                :  "")*/
+            let option = ProfileTextFieldCell.Model(
+                placeholder: "Your company display name",
+                header: "Company Name",
+                text: viewModel.companyName
+            )
+            cell.configure(with: option)
             
             return cell
             
-        case .logout:
+/*        case .logout:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ButtonCell.identifier, for: indexPath) as? ButtonCell
             else { return UITableViewCell() }
             cell.configure(with: .logout)
             
-            return cell
+            return cell*/
+            
+       
         }
     }
 }
@@ -202,16 +225,11 @@ extension ProfileEditViewController: UITableViewDelegate {
         switch row {
             
         case .profilePicture:
-            return 164
+            return 264
                         
-        case .fullName:
+        case .companyName:
             return 96
-            
-        case .description:
-            return 148
-            
-        case .logout:
-            return 44
+        
         }
     }
     
@@ -222,9 +240,6 @@ extension ProfileEditViewController: UITableViewDelegate {
             
         case .profilePicture:
             didTapProfilePicture()
-            
-        case .logout:
-            didRequestLogout()
             
         default:
             break
@@ -306,10 +321,9 @@ extension ProfileEditViewController: UITextFieldDelegate {
         else { return }
         
         switch row {
-        case .fullName:
-            viewModel.fullName = textField.text ?? ""
-        case .description:
-            viewModel.description = textField.text ?? ""
+        case .companyName:
+            viewModel.companyName = textField.text ?? ""
+        
         default:
             break
         }

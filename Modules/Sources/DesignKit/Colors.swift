@@ -5,6 +5,10 @@ public extension UIColor {
         UIColor(resource: .primary)
     }
     
+    static var secondary: UIColor {
+        UIColor(resource: .secondary)
+    }
+    
     static var sub: UIColor {
         UIColor(resource: .sub)
     }
@@ -14,6 +18,10 @@ public extension UIColor {
     }
     
     static var textField: UIColor {
+        UIColor(resource: .textField)
+    }
+    
+    static var tabColor: UIColor {
         UIColor(resource: .textField)
     }
 }

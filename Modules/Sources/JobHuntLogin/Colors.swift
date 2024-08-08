@@ -5,6 +5,10 @@ public extension UIColor {
         UIColor(resource: .primary)
     }
     
+    static var secondary: UIColor {
+        UIColor(resource: .secondary)
+    }
+    
     static var sub: UIColor {
         UIColor(resource: .sub)
     }

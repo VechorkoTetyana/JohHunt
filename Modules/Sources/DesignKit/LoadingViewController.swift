@@ -70,7 +70,7 @@ extension LoadingViewController {
     private func setupSubtitle() {
         let label = UILabel()
         label.text = LoadingStrings.subtitle.rawValue
-        label.font = .subtitle
+        label.font = .title
         label.textColor = .lightGray
 
         stackView.addArrangedSubview(label)

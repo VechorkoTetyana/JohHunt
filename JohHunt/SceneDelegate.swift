@@ -90,19 +90,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 }
-
+/*
 extension UINavigationController {
     func styleJobHunt() {
         navigationBar.tintColor = .accent
         
-        let image = UIImage.angleArrowLeft
+        let image = UIImage.left
         
         navigationBar.backIndicatorImage = image
         navigationBar.backIndicatorTransitionMaskImage = image
 
         navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
-}
+}*/
 
 extension SceneDelegate {
     private func subscribeToLogin() {

@@ -29,8 +29,9 @@ class TabBarController: UITabBarController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .systemBackground
-        tabBar.barTintColor = .systemBackground
+        view.backgroundColor = .white
+        tabBar.barTintColor = .white
+        tabBar.unselectedItemTintColor = .tabColor
         tabBar.tintColor = .accent
     }
 //home jobs messages account
@@ -63,7 +64,7 @@ class TabBarController: UITabBarController {
            container: container
         )
         
-        let settings = SettingsViewController()
+        let settings = SettingsViewController(viewModel: viewModel)
         settings.viewModel = viewModel
         
         let settingsNav = UINavigationController(rootViewController: settings)

@@ -1,5 +1,6 @@
 import DesignKit
 import SnapKit
+import DesignKit
 import JobHuntCore
 import SDWebImage
 
@@ -82,17 +83,17 @@ extension SettingsHeaderCell {
     
     private func setupImageView() {
         let imageView = UIImageView()
-        imageView.image = UIImage(resource: .container)
+        imageView.image = UIImage(resource: .profilePlaceHolder)
         imageView.contentMode = .scaleAspectFit
         
-        imageView.layer.cornerRadius = 28
+        imageView.layer.cornerRadius = 24
         imageView.layer.masksToBounds = true
         
         stackView.addArrangedSubview(imageView)
         
         imageView.snp.makeConstraints { make in
-            make.width.equalTo(56)
-            make.height.equalTo(56)
+            make.width.equalTo(48)
+            make.height.equalTo(48)
         }
         
         self.profileImageView = imageView
@@ -116,14 +117,14 @@ extension SettingsHeaderCell {
     
     private func setupNameLbl() -> UILabel {
         let nameLbl = UILabel()
-        nameLbl.font = .title
+        nameLbl.font = .title1
         nameLbl.textColor = .black
         return nameLbl
     }
     
     private func setupDescriptionLbl() -> UILabel {
         let descriptionLbl = UILabel()
-        descriptionLbl.font = .subtitle
+        descriptionLbl.font = .subtitle1
         descriptionLbl.textColor = .lightGray
         return descriptionLbl
     }

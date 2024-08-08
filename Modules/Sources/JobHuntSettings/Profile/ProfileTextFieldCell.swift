@@ -6,18 +6,15 @@ public final class ProfileTextFieldCell: UITableViewCell {
     struct Model {
         let placeholder: String
         let header: String
-        let footer: String?
         let text: String?
         
         init(
             placeholder: String,
             header: String,
-            footer: String? = nil,
-            text: String? = nil
+            text: String?
         ) {
             self.placeholder = placeholder
             self.header = header
-            self.footer = footer
             self.text = text
         }
     }
@@ -45,7 +42,6 @@ public final class ProfileTextFieldCell: UITableViewCell {
         textField.placeholder = model.placeholder
         textField.text = model.text
         headerLbl.text = model.header
-        footerLbl.text = model.footer ?? ""
         
     }
 }
@@ -59,13 +55,12 @@ extension ProfileTextFieldCell {
         setupContainer()
         setupTextField()
         setupHeader()
-        setupFooter()
     }
     
     private func setupContainer() {
         let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 8
+        view.backgroundColor = .secondary
+        view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
         
         contentView.addSubview(view)
@@ -81,14 +76,14 @@ extension ProfileTextFieldCell {
     
     private func setupTextField() {
         let textField = UITextField()
-        textField.textColor = .tintColor
-        textField.font = .textField
+        textField.textColor = .black
+        textField.font = .subtitle
         
         containerView.addSubview(textField)
         
         textField.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(16)
-            make.right.equalToSuperview().offset(-16)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.centerY.equalToSuperview()
         }
         self.textField = textField
@@ -96,31 +91,16 @@ extension ProfileTextFieldCell {
     
     private func setupHeader() {
         let label = UILabel()
-        label.textColor = .darkGray
-        label.font = .title
+        label.textColor = .black
+        label.font = .titleP2
         
         contentView.addSubview(label)
 
         label.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(16)
+            make.left.equalToSuperview().offset(0)
             make.right.equalToSuperview().offset(-16)
             make.bottom.equalTo(containerView.snp.top).offset(-8)
         }
         headerLbl = label
-    }
-    
-    private func setupFooter() {
-        let label = UILabel()
-        label.textColor = .lightGray
-        label.font = .titleOTP
-        
-        contentView.addSubview(label)
-
-        label.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(12)
-            make.right.equalToSuperview().offset(-12)
-            make.top.equalTo(containerView.snp.bottom).offset(8)
-        }
-        self.footerLbl = label
     }
 }

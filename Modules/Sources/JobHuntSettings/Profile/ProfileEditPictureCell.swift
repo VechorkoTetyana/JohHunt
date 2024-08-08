@@ -4,8 +4,23 @@ import SDWebImage
 
 class ProfileEditPictureCell: UITableViewCell {
     
+    struct Model {
+        let title: String
+        let button: UIButton
+        
+        init(
+            title: String,
+            button: UIButton
+        ) {
+            self.title = title
+            self.button = button
+        }
+    }
+    
     private weak var profileImageView: UIImageView!
     private weak var setNewAvatarBtn: UIButton!
+    private weak var titleLbl: UILabel!
+    private weak var changeBtn: UIButton!
     
     var didTap: (()->())?
     
@@ -17,6 +32,11 @@ class ProfileEditPictureCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
+    }
+    
+    func configure(with model: Model) {
+        titleLbl.text = model.title
+        changeBtn = model.button
     }
     
     func configure(with image: UIImage) {
@@ -38,9 +58,51 @@ extension ProfileEditPictureCell {
         backgroundColor = .clear
         selectionStyle = .none
         
+        configureContenteView()
+
         setupProfileImage()
-        setupSetNewAvatarBtn()
+        profilePictureChangeBtn()
+        setupProfilePictureTitle()
+    }
+    
+    private func configureContenteView() {
+        contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 8
+        contentView.layer.masksToBounds = true
+    }
+    
+    private func setupProfilePictureTitle() {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = .title1
+        label.text = "Profile Picture"
         
+        contentView.addSubview(label)
+
+        label.snp.makeConstraints { make in
+            make.bottom.equalTo(profileImageView.snp.top).offset(-12)
+            make.left.equalToSuperview()
+        }
+        self.titleLbl = label
+    }
+    
+    private func profilePictureChangeBtn() {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = .titleP2
+        button.setTitleColor(.accent, for: .normal)
+        button.setTitleColor(.accent, for: .highlighted)
+        button.setTitleColor(.accent, for: .selected)
+        button.setTitle(ProfileEditStrings.change.rawValue, for: .normal)
+        button.addTarget(self, action: #selector(didTapBtn), for: .touchUpInside)
+        
+        contentView.addSubview(button)
+        
+        button.snp.makeConstraints { make in
+            make.bottom.equalTo(profileImageView.snp.top).offset(-12)
+            make.right.equalToSuperview()
+        }
+        
+        self.setNewAvatarBtn = button
     }
     
     private func setupProfileImage() {
@@ -53,32 +115,11 @@ extension ProfileEditPictureCell {
         
         imageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(96)
             make.size.equalTo(96)
         }
         
         self.profileImageView = imageView
-    }
-    
-    private func setupSetNewAvatarBtn() {
-        let button = UIButton(type: .system)
-        button.titleLabel?.font = .subtitle
-        button.setTitleColor(.accent, for: .normal)
-        button.setTitleColor(.accent, for: .highlighted)
-        button.setTitleColor(.accent, for: .selected)
-        button.setTitle(ProfileEditStrings.setNewAvatar.rawValue, for: .normal)
-        button.addTarget(self, action: #selector(didTapBtn), for: .touchUpInside)
-        
-        contentView.addSubview(button)
-        
-        button.snp.makeConstraints { make in
-            make.top.equalTo(profileImageView.snp.bottom).offset(8)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
-        
-        self.setNewAvatarBtn = button
     }
     
     @objc
