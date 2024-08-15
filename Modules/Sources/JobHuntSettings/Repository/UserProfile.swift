@@ -2,12 +2,12 @@ import Foundation
 
 public struct UserProfile: Codable {
     public let companyName: String
-    public let location: String
+    public let location: String?
     public let profilePictureUrl: URL?
     
     public init(
         companyName: String,
-        location: String,
+        location: String? = nil,
         profilePictureUrl: URL? = nil
     ) {
         self.companyName = companyName

@@ -19,16 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         UINavigationController.styleJobHunt()
         
-/*        let authService = AuthServiceLive()
-        let controller = PhoneNumberViewController()
-        controller.viewModel = PhoneNumberViewModel(authService: authService)
-*/
-//        let controller = PhoneNumberViewController()
-        
         let navigationController = UINavigationController(
             rootViewController: setupInitialViewController()
         )
-//        navigationController.styleJobHunt()
         
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
@@ -90,19 +83,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 }
-/*
-extension UINavigationController {
-    func styleJobHunt() {
-        navigationBar.tintColor = .accent
-        
-        let image = UIImage.left
-        
-        navigationBar.backIndicatorImage = image
-        navigationBar.backIndicatorTransitionMaskImage = image
-
-        navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-    }
-}*/
 
 extension SceneDelegate {
     private func subscribeToLogin() {
@@ -146,9 +126,6 @@ extension SceneDelegate {
     private func setupContainer() {
         container = Container()
         AppAssembly(container: container).assemble()
-        
-//        let assembler = AppAssembly()
-//        assembler.assemble()
     }
 }
 

@@ -34,8 +34,7 @@ class TabBarController: UITabBarController {
         tabBar.unselectedItemTintColor = .tabColor
         tabBar.tintColor = .accent
     }
-//home jobs messages account
-    
+        
     private func setupViewControllers() {
         let home = UIViewController()
         home.tabBarItem = Tab.home.tabBarItem

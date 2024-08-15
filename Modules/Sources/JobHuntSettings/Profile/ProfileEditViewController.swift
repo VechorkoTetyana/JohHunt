@@ -7,11 +7,12 @@ public final class ProfileEditViewController: UIViewController {
     enum Row: Int, CaseIterable {
         case profilePicture = 0
         case companyName = 1
-//        case logout = 2
+        case saveChanges = 2
     }
     
     private weak var tableView: UITableView!
     private weak var titleLbl: UILabel!
+    private var footerView: UIView!
     
     var viewModel: ProfileEditViewModel!
     
@@ -22,6 +23,8 @@ public final class ProfileEditViewController: UIViewController {
         configureTableView()
         setupHideKeyBoardGesture()
         subscribeToKeyboard()
+        
+        view.layoutIfNeeded()
     }
     
     deinit {
@@ -31,12 +34,10 @@ public final class ProfileEditViewController: UIViewController {
     private func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorStyle = .none
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.register(ProfileEditPictureCell.self, forCellReuseIdentifier: ProfileEditPictureCell.identifier)
         tableView.register(ProfileTextFieldCell.self, forCellReuseIdentifier: ProfileTextFieldCell.identifier)
         tableView.register(ButtonCell.self, forCellReuseIdentifier: ButtonCell.identifier)
-    
     }
     
     private func configureEditProfileLbl() {
@@ -52,6 +53,34 @@ public final class ProfileEditViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
         titleLbl = label
+    }
+}
+
+extension ProfileEditViewController: UITextFieldDelegate {
+    
+    @objc
+    private func textFieldDidChange(_ textField: UITextField) {
+        guard
+            let indexPath = tableView.indexPathForRow(
+            at: textField.convert(
+                textField.bounds.origin,
+                to: tableView
+            ))
+        else { return }
+        
+        let row = viewModel.rows1[indexPath.row]
+        
+        guard case let .textField(type) = row else { return }
+        
+        switch type {
+        case .name:
+            viewModel.companyName = textField.text ?? ""
+        case .location:
+            viewModel.location = textField.text ?? ""
+        }
+                
+        let cell = tableView.cellForRow(at: indexPath) as? ProfileTextFieldCell
+        cell?.configure(with: viewModel.modelForTextFieldRow(type))
     }
 }
 
@@ -111,34 +140,15 @@ extension ProfileEditViewController {
 }
 
 extension ProfileEditViewController {
+    
     private func setupUI() {
         view.backgroundColor = .systemBackground
         
-        configureNavigationItem()
         setupTableView()
+        configureTableView()
+        setupSaveButton()
     }
-    
-    private func configureNavigationItem() {
-        navigationItem.largeTitleDisplayMode = .never
-        
-        let saveButton = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(didTapSave))
-        navigationItem.rightBarButtonItem = saveButton
-    }
-    
-    @objc
-    private func didTapSave() {
-        view.endEditing(true)
-        
-        Task {
-            do {
-                try await viewModel.save()
-                navigationController?.popViewController(animated: true)
-            } catch {
-                showError(error.localizedDescription)
-            }
-        }
-    }
-    
+
     private func setupTableView() {
         let tableView = UITableView()
         tableView.backgroundColor = .systemBackground
@@ -148,10 +158,46 @@ extension ProfileEditViewController {
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
             make.top.equalToSuperview().offset(getStatusBarHeight())
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-100)
         }
         
         self.tableView = tableView
+    }
+    
+    private func setupSaveButton() {
+        let button = UIButton(type: .custom)
+        button.setTitle("Save changes", for: .normal)
+        button.backgroundColor = .accent
+        button.titleLabel?.font = .title2
+        button.layer.cornerRadius = 28
+        button.addTarget(self, action: #selector(saveChangesButtonTapped), for: .touchUpInside)
+        view.addSubview(button)
+        
+        button.snp.makeConstraints { make in
+            make.height.equalTo(56)
+            make.width.equalTo(335)
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
+        }
+    }
+
+    @objc
+    private func saveChangesButtonTapped() {
+        print("Save changes button tapped")
+        Task { [weak self] in
+            do {
+                try await self?.viewModel.save()
+                self?.navigationController?.popViewController(animated: true)
+
+            } catch {
+                self?.showError(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func uploadProfilePicture(_ image: UIImage) async throws -> String {
+       
+        return "profilePicture/someName.jpg"
     }
     
     private func getStatusBarHeight() -> CGFloat {
@@ -182,38 +228,21 @@ extension ProfileEditViewController: UITableViewDataSource {
                 cell.configure(with: url)
             }
                         
-            cell.didTap = { [weak self] in
-                self?.didTapProfilePicture()
-            }
-            
             return cell
             
         case .companyName:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldCell.identifier, for: indexPath) as? ProfileTextFieldCell
             else { return UITableViewCell() }
             
-            cell.textField.delegate = self
-            
-         /*   cell.configure(with: row == .fullName
-                ? .companyName(text: viewModel.companyName)
-                :  "")*/
-            let option = ProfileTextFieldCell.Model(
-                placeholder: "Your company display name",
-                header: "Company Name",
-                text: viewModel.companyName
-            )
-            cell.configure(with: option)
+            cell.configure(with: viewModel.modelForTextFieldRow(.name))
+        
+            cell.textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
             
             return cell
             
-/*        case .logout:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ButtonCell.identifier, for: indexPath) as? ButtonCell
-            else { return UITableViewCell() }
-            cell.configure(with: .logout)
-            
-            return cell*/
-            
-       
+        case .saveChanges:
+            print("Save changes")
+            return UITableViewCell()
         }
     }
 }
@@ -229,7 +258,9 @@ extension ProfileEditViewController: UITableViewDelegate {
                         
         case .companyName:
             return 96
-        
+            
+        case .saveChanges:
+            return 196
         }
     }
     
@@ -243,24 +274,6 @@ extension ProfileEditViewController: UITableViewDelegate {
             
         default:
             break
-        }
-    }
-    
-    private func didRequestLogout() {
-        let alert = UIAlertController(title: "Logout", message: "Do you really want to logout?", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { [weak self] _ in
-            self?.didConfirmLogout()
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(alert, animated: true)
-    }
-    
-    private func didConfirmLogout() {
-        do {
-            try viewModel.logout()
-//          NotificationCenter.default
-        } catch {
-            showError(error.localizedDescription)
         }
     }
 }
@@ -305,27 +318,5 @@ extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigati
             ], with: .automatic)
         }
         picker.dismiss(animated: true)
-    }
-}
-
-
-extension ProfileEditViewController: UITextFieldDelegate {
-    
-    public func textFieldDidEndEditing(_ textField: UITextField) {
-                
-        guard
-            let indexPath = tableView.indexPathForRow(
-            at: textField.convert(textField.bounds.origin, to: tableView)
-        ),
-            let row = Row(rawValue: indexPath.row)
-        else { return }
-        
-        switch row {
-        case .companyName:
-            viewModel.companyName = textField.text ?? ""
-        
-        default:
-            break
-        }
     }
 }

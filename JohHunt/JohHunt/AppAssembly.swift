@@ -32,7 +32,5 @@ class AppAssembly {
         container.register(ProfilePictureRepository.self) { container in
             profilePictureRepository
         }
-        
-//        let authServiceFromContainer = container.resolve(authService.self)!
     }
 }

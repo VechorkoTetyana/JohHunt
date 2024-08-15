@@ -28,20 +28,24 @@ public final class SettingsViewModel {
     var header: Header
     var rows: [Row]
     
+    private let authService: AuthService
     private let userProfileRepository: UserProfileRepository
     private let profilePictureRepository: ProfilePictureRepository
     let container: Container
+    
+    var didUpdateHeader: (() -> ())?
     
     public init(
      container: Container
      ) {
          self.container = container
+         self.authService = container.resolve(AuthService.self)!
          self.userProfileRepository = container.resolve(UserProfileRepository.self)!
          self.profilePictureRepository = container.resolve(ProfilePictureRepository.self)!
          
          if let profile = userProfileRepository.profile {
              companyName = profile.companyName
-             location = profile.location
+             location = profile.location ?? "California, CA"
              profilePictureUrl = profile.profilePictureUrl
          }
          
@@ -58,22 +62,14 @@ public final class SettingsViewModel {
          )
      }
     
-    var didUpdateHeader: (() -> ())?
-            
+    func logout() throws {
+        try authService.logout()
+        NotificationCenter.default.post(.didLogout)
+    }
+                
     var userRepository: UserProfileRepository {
         container.resolve(UserProfileRepository.self)!
     }
-    
-/*    public init(container: Container)
-    {
-        self.container = container
-
-        header = Header(
-            imageUrl: nil,
-            name: "Company",
-            description: "Location not specified"
-        )
-    } */
     
     func fetchUserProfile() {
         Task { [weak self] in
@@ -93,7 +89,7 @@ public final class SettingsViewModel {
         header = Header(
             imageUrl: userProfile.profilePictureUrl,
             name: userProfile.companyName,
-            description: userProfile.location
+            description: userProfile.location ?? "California, CA"
         )
         
         didUpdateHeader?()

@@ -17,7 +17,7 @@ class AccountButtonCell: UITableViewCell {
     }
     
     private weak var iconImageView: UIImageView!
-    private weak var titleLbl: UILabel!
+    public weak var titleLbl: UILabel!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -72,7 +72,7 @@ extension AccountButtonCell {
     }
     
     private func setupTitle() {
-        let label = UILabel()
+        var label = UILabel()
         label.textColor = .black
         label.font = .title2
         

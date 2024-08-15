@@ -9,6 +9,10 @@ public extension UIColor {
         UIColor(resource: .secondary)
     }
     
+    static var darkRed: UIColor {
+        UIColor(resource: .darkRed)
+    }
+    
     static var sub: UIColor {
         UIColor(resource: .sub)
     }

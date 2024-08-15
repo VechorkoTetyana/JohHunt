@@ -243,14 +243,10 @@ extension OTPViewController {
         let button = UIButton()
         button.backgroundColor = .accent
         button.titleLabel?.font = .subtitle2
-        
         button.titleLabel?.textColor = .primary
-        
         button.setTitle(OTPText.submit.rawValue, for: .normal)
-        
         button.layer.cornerRadius = 28
         button.layer.masksToBounds = true
-        
         button.addTarget(self, action: #selector(didTapContinueBtn), for: .touchUpInside)
         
         view.addSubview(button)
@@ -300,10 +296,6 @@ extension OTPViewController {
                 
                 loadingVC.dismiss(animated: true) {
                     self?.didLoginSuccessfully() }
-                
-           /*     let vc = UIViewController()
-                vc.modalPresentationStyle = .fullScreen
-                self?.present(vc, animated: true) */
                 
             } catch {
                 self?.showError(error.localizedDescription)

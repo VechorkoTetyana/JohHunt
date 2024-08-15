@@ -8,6 +8,7 @@ public final class SettingsViewController: UIViewController {
     enum Row: Int, CaseIterable {
         case header = 0
         case rowsOfOptions = 1
+        case logout = 2
     }
     
     struct Model {
@@ -84,14 +85,8 @@ public final class SettingsViewController: UIViewController {
             imageIcon: .termOfService
         ))
         
-        options.append(Model(
-            label: "Logout",
-            imageIcon: .logout
-        ))
-        
         return options
     }
-    
 }
 
 extension SettingsViewController {
@@ -137,8 +132,10 @@ extension SettingsViewController: UITableViewDataSource {
         case .header:
             return 1
         case .rowsOfOptions:
- //           return options().count
             return accauntSettingOptions.count
+        case .logout:
+            print("Logout button tapped")
+            return 1
         }
     }
     
@@ -166,6 +163,14 @@ extension SettingsViewController: UITableViewDataSource {
             cell?.configure(with: accountCellModel)
 
             return cell ?? UITableViewCell()
+            
+        case .logout:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AccountButtonCell.identifier, for: indexPath) as? AccountButtonCell
+            else { return UITableViewCell() }
+            cell.configure(with: .logout)
+            cell.titleLbl.textColor = .darkRed
+            
+            return cell
         }
     }
 }
@@ -177,25 +182,44 @@ extension SettingsViewController: UITableViewDelegate {
         switch section {
         case .header:
             return 128
-        case .rowsOfOptions:
+        case .rowsOfOptions, .logout:
             return 56
         }
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            presentProfileEdit()
-    }
-    
-    private func presentProfileEdit() {
-            let viewModel = ProfileEditViewModel(container: viewModel.container)
+        let viewModel = ProfileEditViewModel(container: viewModel.container)
+        let controller = ProfileEditViewController()
+        
+        guard let section = Row(rawValue: indexPath.section) else { return }
 
-              /*  authService: viewModel.authService,
-                  userRepository: viewModel.userRepository,
-                  profilePictureRepository: viewModel.profilePictureRepository */
-            
-            
-            let controller = ProfileEditViewController()
+        switch section {
+        case .header:
             controller.viewModel = viewModel
             navigationController?.pushViewController(controller, animated: true)
+
+        case .rowsOfOptions:
+            print("Break")
+            
+        case .logout:
+            didRequestLogout()
+        }
+    }
+    
+    private func didRequestLogout() {
+        let alert = UIAlertController(title: "Logout", message: "Do you really want to logout?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { [weak self] _ in
+            self?.didConfirmLogout()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    private func didConfirmLogout() {
+        do {
+            try viewModel.logout()
+        } catch {
+            showError(error.localizedDescription)
+        }
     }
 }
