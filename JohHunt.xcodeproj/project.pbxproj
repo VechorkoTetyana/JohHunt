@@ -23,7 +23,7 @@
 		B852389F2C5EF89300EEF9BC /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B852389E2C5EF89300EEF9BC /* AppAssembly.swift */; };
 		B85238A22C5EFE7900EEF9BC /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = B85238A12C5EFE7900EEF9BC /* Swinject */; };
 		B85238A42C5EFE7900EEF9BC /* Swinject-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = B85238A32C5EFE7900EEF9BC /* Swinject-Dynamic */; };
-		B8F7690E2C45721A00185CB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8F7690D2C45721A00185CB7 /* GoogleService-Info.plist */; };
+		B85238BC2C6CD87D00EEF9BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B85238BB2C6CD87C00EEF9BC /* GoogleService-Info.plist */; };
 		B8F769112C45763900185CB7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B8F769102C45763900185CB7 /* FirebaseAuth */; };
 		B8F769132C467F4F00185CB7 /* JobHuntAuthentication in Frameworks */ = {isa = PBXBuildFile; productRef = B8F769122C467F4F00185CB7 /* JobHuntAuthentication */; };
 		B8F769152C467F5300185CB7 /* JobHuntLogin in Frameworks */ = {isa = PBXBuildFile; productRef = B8F769142C467F5300185CB7 /* JobHuntLogin */; };
@@ -44,7 +44,7 @@
 		B85238952C5CE20D00EEF9BC /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		B852389A2C5EF7DC00EEF9BC /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		B852389E2C5EF89300EEF9BC /* AppAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
-		B8F7690D2C45721A00185CB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B85238BB2C6CD87C00EEF9BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +92,8 @@
 				B852389A2C5EF7DC00EEF9BC /* DIContainer.swift */,
 				665AF04D2C2B1D17009767CC /* SceneDelegate.swift */,
 				665AF0562C2B1D19009767CC /* LaunchScreen.storyboard */,
-				B8F7690D2C45721A00185CB7 /* GoogleService-Info.plist */,
 				665AF0592C2B1D19009767CC /* Info.plist */,
+				B85238BB2C6CD87C00EEF9BC /* GoogleService-Info.plist */,
 			);
 			path = JohHunt;
 			sourceTree = "<group>";
@@ -138,17 +138,9 @@
 		B85238942C5CE1E600EEF9BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B85238972C5CE21700EEF9BC /* Fonts */,
 				B85238952C5CE20D00EEF9BC /* Media.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		B85238972C5CE21700EEF9BC /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,9 +218,9 @@
 				665AF0552C2B1D19009767CC /* Assets.xcassets in Resources */,
 				665AF0582C2B1D19009767CC /* Base in Resources */,
 				665AF0642C2B1E2F009767CC /* Urbanist-Medium.ttf in Resources */,
-				B8F7690E2C45721A00185CB7 /* GoogleService-Info.plist in Resources */,
 				B85238962C5CE20D00EEF9BC /* Media.xcassets in Resources */,
 				665AF0632C2B1E2F009767CC /* Urbanist-Bold.ttf in Resources */,
+				B85238BC2C6CD87D00EEF9BC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

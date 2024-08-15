@@ -2,8 +2,6 @@ import Foundation
 import FirebaseDatabase
 import JobHuntAuthentication
 
-// https://jobhunt-92d8e-default-rtdb.europe-west1.firebasedatabase.app
-
 public enum UserProfileRepositoryError: Error {
     case notAuthenticated
 }

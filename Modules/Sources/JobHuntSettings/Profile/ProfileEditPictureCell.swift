@@ -107,7 +107,7 @@ extension ProfileEditPictureCell {
     
     private func setupProfileImage() {
         let imageView = UIImageView()
-        imageView.layer.cornerRadius = 48
+        imageView.layer.cornerRadius = 60
         imageView.layer.masksToBounds = true
         imageView.image = UIImage(resource: .container)
         
@@ -115,8 +115,8 @@ extension ProfileEditPictureCell {
         
         imageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(96)
-            make.size.equalTo(96)
+            make.bottom.equalToSuperview().offset(-24)
+            make.size.equalTo(120)
         }
         
         self.profileImageView = imageView

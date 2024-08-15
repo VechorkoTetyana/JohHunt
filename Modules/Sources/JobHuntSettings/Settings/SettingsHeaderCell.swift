@@ -48,8 +48,8 @@ extension SettingsHeaderCell {
     
     private func setupContainer() {
         let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 8
+        view.backgroundColor = .secondary
+        view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
         
         contentView.addSubview(view)
@@ -83,8 +83,8 @@ extension SettingsHeaderCell {
     
     private func setupImageView() {
         let imageView = UIImageView()
-        imageView.image = UIImage(resource: .profilePlaceHolder)
-        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(resource: .container)
+        imageView.contentMode = .scaleAspectFill
         
         imageView.layer.cornerRadius = 24
         imageView.layer.masksToBounds = true
@@ -92,6 +92,8 @@ extension SettingsHeaderCell {
         stackView.addArrangedSubview(imageView)
         
         imageView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview()
             make.width.equalTo(48)
             make.height.equalTo(48)
         }

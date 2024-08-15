@@ -6,7 +6,7 @@ enum ProfileEditStrings: String {
     case change = "Change"
     case companyName = "Company name"
     case companyNamePlaceHolder = "Your company display name"
-    case logout = "Log out of your account"
+    case logout = "Log Out"
 }
 
 extension ProfileTextFieldCell.Model {
@@ -15,7 +15,9 @@ extension ProfileTextFieldCell.Model {
         Self(
             placeholder: ProfileEditStrings.companyNamePlaceHolder.rawValue,
             header: ProfileEditStrings.companyName.rawValue,
-            text: text)
+            text: text,
+            isValid: true
+        )
     }
 }
 

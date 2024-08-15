@@ -7,15 +7,18 @@ public final class ProfileTextFieldCell: UITableViewCell {
         let placeholder: String
         let header: String
         let text: String?
+        let isValid: Bool
         
         init(
             placeholder: String,
             header: String,
-            text: String?
+            text: String?,
+            isValid: Bool
         ) {
             self.placeholder = placeholder
             self.header = header
             self.text = text
+            self.isValid = isValid
         }
     }
     

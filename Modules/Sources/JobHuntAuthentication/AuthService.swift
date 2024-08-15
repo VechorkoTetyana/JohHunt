@@ -1,8 +1,6 @@
 import Foundation
 import FirebaseAuth
 
-// https://github.com/firebase/firebase-ios-sdk
-
 public enum AuthError: Error {
     case noVerificationID
 }
